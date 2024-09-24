@@ -1,12 +1,13 @@
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import com.vanniktech.maven.publish.SonatypeHost
 
-@Suppress("DSL_SCOPE_VIOLATION") plugins {
-    alias(androidx.plugins.library) apply false
+plugins {
     alias(kotlinz.plugins.multiplatform) apply false
     alias(kotlinz.plugins.serialization) apply false
+    alias(kotlinz.plugins.compose) apply false
     alias(asoft.plugins.library) apply false
     alias(vanniktech.plugins.maven.publish) apply false
+    alias(kotlinz.plugins.root.compiler.compose) apply false
     alias(kotlinz.plugins.dokka)
 }
 
@@ -19,12 +20,12 @@ val v = asoft.versions.root.get()
 group = "tz.co.asoft"
 version = v
 
-//tasks.dokkaHtmlMultiModule {
-//    moduleName.set("Geo")
-//    outputDirectory.set(rootDir.resolve("docs"))
-//    moduleVersion.set(asoft.versions.root.get())
-//    includes.from("ReadMe.md")
-//}
+tasks.dokkaHtmlMultiModule {
+    moduleName.set("Nation")
+    outputDirectory.set(rootDir.resolve("docs"))
+    moduleVersion.set(asoft.versions.root.get())
+    includes.from("ReadMe.md")
+}
 
 subprojects {
     apply(plugin = "org.jetbrains.dokka")

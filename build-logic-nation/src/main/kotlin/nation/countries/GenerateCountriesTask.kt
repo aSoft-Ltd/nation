@@ -13,7 +13,7 @@ open class GenerateCountriesTask : DefaultTask() {
     }
 
     @OutputDirectory
-    val outputDir: File = File(project.buildDir, "generated/geo/countries/kotlin")
+    val outputDir: File = File(project.buildDir, "generated/nation/countries/kotlin")
 
     @TaskAction
     fun doGeneration() {

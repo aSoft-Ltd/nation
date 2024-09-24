@@ -22,3 +22,4 @@ rootProject.name = "nation"
 includeBuild("build-logic-nation")
 
 includeSubs("nation", ".", "countries", "currencies")
+includeSubs("nation-flags", "flags", "compose")

@@ -13,7 +13,7 @@ description = "A kotlin multiplatform library for offline country support"
 val generateCountries by tasks.getting(GenerateCountriesTask::class)
 
 kotlin {
-    jvm { library() }
+    if (Targeting.JVM) jvm { library() }
     if (Targeting.JS) js(IR) { library() }
     if (Targeting.WASM) wasmJs { library() }
     if (Targeting.WASM) wasmWasi { library() }
