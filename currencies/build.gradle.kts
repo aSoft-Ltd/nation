@@ -12,7 +12,7 @@ plugins {
 description = "A kotlin multiplatform library to deal with currencies"
 
 val dir = layout.buildDirectory.dir("generated/currencies/kotlin")
-val generate by tasks.registering(CurrencyGenerator::class) {
+val generateCurrencies by tasks.registering(CurrencyGenerator::class) {
     outputDir.set(dir)
 }
 
@@ -26,13 +26,13 @@ kotlin {
     if (Targeting.LINUX) linuxTargets() else listOf()
     if (Targeting.MINGW) mingwTargets() else listOf()
 
-    targets.configureEach {
-        compilations.all {
-            compileTaskProvider.configure {
-                dependsOn(generate)
-            }
-        }
-    }
+//    targets.configureEach {
+//        compilations.all {
+//            compileTaskProvider.configure {
+//                dependsOn(generateCurrencies)
+//            }
+//        }
+//    }
 
     sourceSets {
         val commonMain by getting {
@@ -49,6 +49,15 @@ kotlin {
             }
         }
     }
+}
+
+tasks.configureEach {
+    if(name!=::generateCurrencies.name) dependsOn(generateCurrencies)
+}
+
+tasks.named("androidNativeArm32SourcesJar").configure {
+    println("====".repeat(4))
+    println(this::class.qualifiedName)
 }
 
 rootProject.the<NodeJsRootExtension>().apply {

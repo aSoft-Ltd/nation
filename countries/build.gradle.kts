@@ -9,7 +9,7 @@ plugins {
 
 description = "A kotlin multiplatform library for offline country support"
 
-val generateCountries by tasks.getting(GenerateCountriesTask::class)
+val generateCountries by tasks.registering(GenerateCountriesTask::class)
 
 kotlin {
     if (Targeting.JVM) jvm { library() }
@@ -21,17 +21,17 @@ kotlin {
     if (Targeting.LINUX) linuxTargets() else listOf()
     if (Targeting.MINGW) mingwTargets() else listOf()
 
-    targets.configureEach {
-        compilations.all {
-            compileTaskProvider.configure {
-                dependsOn(generateCountries)
-            }
-        }
-    }
+//    targets.configureEach {
+//        compilations.all {
+//            compileTaskProvider.configure {
+//                dependsOn(generateCountries)
+//            }
+//        }
+//    }
 
     sourceSets {
         val commonMain by getting {
-            kotlin.srcDir(generateCountries.outputDir)
+            kotlin.srcDir(generateCountries.map { it.outputDir})
             dependencies {
                 api(kotlinx.serialization.core)
             }
@@ -43,4 +43,8 @@ kotlin {
             }
         }
     }
+}
+
+tasks.configureEach {
+    if(name!=::generateCountries.name) dependsOn(generateCountries)
 }
