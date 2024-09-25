@@ -15,7 +15,7 @@ repositories {
     publicRepos()
 }
 
-val v = asoft.versions.root.get()
+val v = libs.versions.asoft.get()
 val g = "tz.co.asoft"
 group = g
 version = v
