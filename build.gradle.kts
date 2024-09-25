@@ -16,8 +16,8 @@ repositories {
 }
 
 val v = asoft.versions.root.get()
-
-group = "tz.co.asoft"
+val g = "tz.co.asoft"
+group = g
 version = v
 
 tasks.dokkaHtmlMultiModule {
@@ -32,6 +32,7 @@ subprojects {
     apply(plugin = "com.vanniktech.maven.publish")
 
     val p = this
+    group = g
     version = v
 
     configure<MavenPublishBaseExtension> {
@@ -45,11 +46,11 @@ subprojects {
             name.set(p.name)
             description.set(p.description)
             inceptionYear.set("2019")
-            url.set("https://github.com/aSoft-Ltd/geo")
+            url.set("https://github.com/aSoft-Ltd/nation")
             licenses {
                 license {
                     name.set("MIT License")
-                    url.set("https://github.com/aSoft-Ltd/geo/blob/master/LICENSE")
+                    url.set("https://github.com/aSoft-Ltd/nation/blob/master/LICENSE")
                 }
             }
             developers {
@@ -60,9 +61,9 @@ subprojects {
                 }
             }
             scm {
-                url.set("https://github.com/aSoft-Ltd/geo/")
-                connection.set("scm:git:git://github.com/aSoft-Ltd/geo.git")
-                developerConnection.set("scm:git:ssh://git@github.com/aSoft-Ltd/geo.git")
+                url.set("https://github.com/aSoft-Ltd/nation/")
+                connection.set("scm:git:git://github.com/aSoft-Ltd/nation.git")
+                developerConnection.set("scm:git:ssh://git@github.com/aSoft-Ltd/nation.git")
             }
         }
     }

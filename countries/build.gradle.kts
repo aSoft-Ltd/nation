@@ -1,4 +1,3 @@
-import com.android.build.gradle.internal.tasks.factory.dependsOn
 import nation.countries.GenerateCountriesTask
 
 plugins {
@@ -34,7 +33,6 @@ kotlin {
         val commonMain by getting {
             kotlin.srcDir(generateCountries.outputDir)
             dependencies {
-//                api(projects.kashCurrency)
                 api(kotlinx.serialization.core)
             }
         }
@@ -42,7 +40,6 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlinx.serialization.json)
-//                implementation(projects.kommanderCore)
             }
         }
     }

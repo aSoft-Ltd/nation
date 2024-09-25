@@ -32,14 +32,10 @@ open class GenerateCountriesTask : DefaultTask() {
                 
             package nation
             
-            // import nation.Currency
-            // import nation.Currency.*
-            import kotlin.js.JsExport
             import kotlinx.serialization.Serializable
             
-            // @JsExport
             @Serializable
-            enum class Country(val code: String, val label: String, /* val currency: Currency, */ val isoCode: String, val dialingCode: String) {
+            enum class Country(val code: String, val label: String, val isoCode: String, val dialingCode: Int) {
         """.trimIndent()
         )
 
@@ -52,7 +48,7 @@ open class GenerateCountriesTask : DefaultTask() {
         append("\t")
         append("/** $name */ \n")
         append("\t$code(")
-        append(""""$code","$name",/*${currency.code},*/"$isoCode","$dialingCode"""")
+        append(""""$code","$name","$isoCode",${dialingCode.replace("+", "")}""")
         append(")")
     }
 }
