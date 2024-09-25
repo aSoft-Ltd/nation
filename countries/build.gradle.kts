@@ -21,25 +21,11 @@ kotlin {
     if (Targeting.LINUX) linuxTargets() else listOf()
     if (Targeting.MINGW) mingwTargets() else listOf()
 
-//    targets.configureEach {
-//        compilations.all {
-//            compileTaskProvider.configure {
-//                dependsOn(generateCountries)
-//            }
-//        }
-//    }
-
     sourceSets {
         val commonMain by getting {
             kotlin.srcDir(generateCountries.map { it.outputDir})
             dependencies {
                 api(kotlinx.serialization.core)
-            }
-        }
-
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlinx.serialization.json)
             }
         }
     }

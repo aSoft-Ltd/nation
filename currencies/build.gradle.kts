@@ -26,14 +26,6 @@ kotlin {
     if (Targeting.LINUX) linuxTargets() else listOf()
     if (Targeting.MINGW) mingwTargets() else listOf()
 
-//    targets.configureEach {
-//        compilations.all {
-//            compileTaskProvider.configure {
-//                dependsOn(generateCurrencies)
-//            }
-//        }
-//    }
-
     sourceSets {
         val commonMain by getting {
             kotlin.srcDir(dir)
@@ -53,11 +45,6 @@ kotlin {
 
 tasks.configureEach {
     if(name!=::generateCurrencies.name) dependsOn(generateCurrencies)
-}
-
-tasks.named("androidNativeArm32SourcesJar").configure {
-    println("====".repeat(4))
-    println(this::class.qualifiedName)
 }
 
 rootProject.the<NodeJsRootExtension>().apply {
