@@ -1,4 +1,4 @@
-# Compose Flags
+# Nation Flags Compose
 
 Flag composable to use in kotlin multiplatform
 
