@@ -9,5 +9,5 @@ repositories {
 }
 
 dependencies {
-    api(kotlinx.serialization.json)
+    api(kotlinx.serialization.build.json)
 }

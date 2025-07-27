@@ -1,5 +1,4 @@
 import nation.currencies.CurrencyGenerator
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 
 plugins {
@@ -17,7 +16,7 @@ val generateCurrencies by tasks.registering(CurrencyGenerator::class) {
 }
 
 kotlin {
-    jvm { library() }
+    if (Targeting.JVM) jvm { library() }
     if (Targeting.JS) js(IR) { library() }
     if (Targeting.WASM) wasmJs { library() }
     if (Targeting.WASM) wasmWasi { library() }
@@ -34,22 +33,19 @@ kotlin {
                 api(projects.nationCountries)
             }
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(libs.kommander.core)
-                implementation(kotlinx.serialization.json)
-            }
+        commonTest.dependencies {
+            implementation(libs.kommander.core)
+            implementation(kotlinx.serialization.json)
+        }
+
+        if (Targeting.JVM) jvmTest.dependencies {
+            implementation(kotlin("test-junit5"))
         }
     }
 }
 
 tasks.configureEach {
-    if(name!=::generateCurrencies.name) dependsOn(generateCurrencies)
-}
-
-rootProject.the<NodeJsRootExtension>().apply {
-    version = npm.versions.node.version.get()
-    downloadBaseUrl = npm.versions.node.url.get()
+    if (name != ::generateCurrencies.name) dependsOn(generateCurrencies)
 }
 
 rootProject.tasks.withType<KotlinNpmInstallTask>().configureEach {
