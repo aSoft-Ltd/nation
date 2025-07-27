@@ -47,12 +47,3 @@ kotlin {
 tasks.configureEach {
     if (name != ::generateCurrencies.name) dependsOn(generateCurrencies)
 }
-
-rootProject.tasks.withType<KotlinNpmInstallTask>().configureEach {
-    args.add("--ignore-engines")
-}
-
-tasks.named("wasmJsTestTestDevelopmentExecutableCompileSync").configure {
-    mustRunAfter(tasks.named("jsBrowserTest"))
-    mustRunAfter(tasks.named("jsNodeTest"))
-}
