@@ -12,17 +12,17 @@ data class RawCountry(
     val flag: String,
     @SerialName("dialling_code") val dialingCode: String,
     val isoCode: String
-)
-
-@Serializable
-data class RawCurrency(
-    val code: String,
-    val name: String,
+) {
+    @Serializable
+    data class RawCurrency(
+        val code: String,
+        val name: String,
 //    val symbol: String,
-)
+    )
 
-@Serializable
-data class RawLanguage(
+    @Serializable
+    data class RawLanguage(
 //    val code: String,
-    val name: String
-)
+        val name: String
+    )
+}

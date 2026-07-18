@@ -1,13 +1,12 @@
 package nation.countries
 
-import Resource
 import kotlinx.serialization.json.Json
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import java.io.File
 
-open class GenerateCountriesTask : DefaultTask() {
+abstract class GenerateCountriesTask : DefaultTask() {
     private val codec = Json {
         ignoreUnknownKeys = true
     }
